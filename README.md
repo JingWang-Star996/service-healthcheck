@@ -1,27 +1,92 @@
-# OpenClaw Healthcheck
+# OpenClaw Healthcheck — 19-Item Self-Check Script
 
 <p align="center">
-  <strong>🇨🇳 中文</strong> · <strong>🇬🇧 English</strong> · <strong>🇯🇵 日本語</strong>
+  <strong>🇨🇳 中文</strong> · <strong>🇬🇧 English</strong> · <strong>🇯🇵 日本語</strong> · <strong>🇰🇷 한국어</strong> · <strong>🇪🇸 Español</strong> · <strong>🇫🇷 Français</strong> · <strong>🇩🇪 Deutsch</strong> · <strong>🇷🇺 Русский</strong>
 </p>
 
-> 一个纯 Bash 脚本，用于 OpenClaw Gateway 和 Agent 运行环境的 **19 项全量自检**。
-> 零依赖、零 token 消耗、输出结构化 JSON，支持趋势记录。
-
-> A pure Bash script for **19-item comprehensive self-check** of OpenClaw Gateway and Agent runtime environment.
+> A pure Bash script for comprehensive self-check of AI Agent runtime environments.
 > Zero dependencies, zero token cost, structured JSON output, trend tracking.
 
-> OpenClaw Gateway と Agent 実行環境の **19 項目包括的セルフチェック** を行う纯 Bash スクリプト。
-> ゼロ依存、ゼロトークン消費、構造化 JSON 出力、トレンド追跡対応。
+> 一个纯 Bash 脚本，用于 AI Agent 运行环境的 19 项全量自检。零依赖、零 token、结构化 JSON 输出。
+
+> AI Agent 実行環境の包括的セルフチェックを行う纯 Bash スクリプト。ゼロ依存、ゼロトークン。
+
+> AI Agent 실행 환경의 포괄적 셀프 체크를 위한 순수 Bash 스크립트. 제로 의존성, 제로 토큰.
+
+> Un script Bash puro para verificación integral de entornos de ejecución de IA. Cero dependencias, cero tokens.
+
+> Un script Bash pur pour la vérification des environnements d'exécution IA. Zéro dépendance, zéro token.
+
+> Ein reines Bash-Skript für umfassende Selbstprüfung von KI-Agent-Laufzeitumgebungen. Null Abhängigkeiten, null Token.
+
+> Чистый Bash-скрипт для комплексной самодиагностики сред исполнения AI-агентов. Нулевые зависимости, нулевые токены.
 
 ---
 
-## 语言导航 / Language Navigation
+## Language Navigation / 语言导航 / 言語ナビ / 언어 네비게이션 / Navegación / Navigation / Navigation / Навигация
 
-| 语言 | 直达链接 |
-|------|----------|
-| 🇨🇳 中文 | [为什么需要](#-为什么需要) · [架构](#-架构) · [自检项目](#-自检项目19-项) · [输出](#-输出) · [安装](#-安装) · [配置](#-配置) |
-| 🇬🇧 English | [Why](#-why) · [Architecture](#-architecture) · [Checks](#-checks-19-items) · [Output](#-output) · [Install](#-installation) · [Config](#-configuration) |
-| 🇯🇵 日本語 | [なぜ必要](#-なぜ必要か) · [アーキテクチャ](#-アーキテクチャ) · [チェック項目](#-チェック項目19-項目) · [出力](#-出力) · [インストール](#-インストール) · [設定](#-設定) |
+| # | Language | Quick Link |
+|---|----------|-----------|
+| 1 | 🇨🇳 中文 | [为什么需要](#zh-cn-中文) |
+| 2 | 🇬🇧 English | [Why](#en-english) |
+| 3 | 🇯🇵 日本語 | [なぜ必要](#ja-日本語) |
+| 4 | 🇰🇷 한국어 | [왜 필요한가](#ko-한국어) |
+| 5 | 🇪🇸 Español | [Por qué](#es-español) |
+| 6 | 🇫🇷 Français | [Pourquoi](#fr-français) |
+| 7 | 🇩🇪 Deutsch | [Warum](#de-deutsch) |
+| 8 | 🇷🇺 Русский | [Зачем](#ru-русский) |
+
+---
+
+## Common — 公共信息 / 共通情報 / 공통 정보 / Información común / Info commune / Gemeinsame Infos / Общая информация
+
+### Check Items (19) — 自检项目 / チェック項目 / 체크 항목 / Ítems / Éléments / Prüfpunkte / Элементы
+
+| Layer | Items | Focus |
+|-------|-------|-------|
+| L0 — Survival | 6 | Process, Memory, Disk, OOM, Sub-agent, Dead-loop |
+| L1 — Runtime | 3 | WebSocket, Port, Crash logs |
+| L2 — Deep | 6 | Memory trend, Zombie, Env, Temp files, DNS, Workspace |
+| L3 — Business | 4 | Projects, Daily summary, Memory freshness, Pending tasks |
+
+### Output — 输出 / 出力 / 출력 / Salida / Sortie / Ausgabe / Вывод
+
+```bash
+$ bash scripts/healthcheck.sh
+  ✅ All passed | 19/19 | < 5s
+```
+
+```json
+{
+  "ts": "2026-05-01T11:14:38+08:00",
+  "overall": "ok",
+  "total": 19, "ok": 19, "warn": 0, "critical": 0,
+  "checks": [{"id": "L0-Q1", "status": "ok", "value": 1}]
+}
+```
+
+### Exit Codes — 退出码 / 終了コード / 종료 코드 / Códigos / Codes / Exit-Codes / Коды
+
+| Code | Meaning |
+|------|---------|
+| 0 | All passed |
+| 1 | Warnings |
+| 2 | Critical |
+
+### Quick Install — 快速安装 / クイックインストール / 빠른 설치 / Instalación / Installation / Schnelle Installation / Быстрая установка
+
+```bash
+git clone https://github.com/JingWang-Star996/openclaw-healthcheck.git
+cd openclaw-healthcheck
+bash scripts/healthcheck.sh
+```
+
+### Crontab — 定时任务 / 定时タスク /定时 작업 / Cron / Cron / Cron / Крон
+
+```bash
+# Hourly, zero tokens
+(crontab -l 2>/dev/null; echo "0 * * * * bash /path/to/scripts/healthcheck.sh --json >> /dev/null 2>&1") | crontab -
+```
 
 ---
 
@@ -29,123 +94,31 @@
 
 ### 为什么需要
 
-OpenClaw（及类似 AI Agent 框架）长时间运行时，常见问题包括：
-- 内存泄漏导致 OOM 崩溃
-- 子代理卡死/僵尸进程
-- 代码死循环疯狂写文件
-- WebSocket 连接泄漏
-- 崩溃日志堆积但无人发现
-
-传统做法是每次用 AI agent 手动执行命令检查——**浪费 token，且无法积累趋势**。
-
-这个脚本用纯 Bash 解决：**每小时自动跑，零 token，结构化输出，异常时自动通知**。
+OpenClaw（及类似 AI Agent 框架）长时间运行时，常见问题包括：内存泄漏导致 OOM 崩溃、子代理卡死/僵尸进程、代码死循环疯狂写文件、WebSocket 连接泄漏、崩溃日志堆积但无人发现。传统做法是用 AI agent 手动检查——**浪费 token，无法积累趋势**。
 
 ### 架构
 
 ```
-系统 crontab (每小时)     OpenClaw cron (错开几分钟)
-      ↓                        ↓
-healthcheck.sh --json    读取 status.json
-      ↓                        ↓
-  ├─ 跑 19 项检查          ├─ overall=ok → NO_REPLY（静默）
-  ├─ 写 status.json        └─ overall≠ok → 私聊通知
+系统 crontab (每小时)        OpenClaw cron (错开几分钟)
+      ↓                            ↓
+healthcheck.sh --json        读取 status.json
+      ↓                            ↓
+  ├─ 跑 19 项检查              ├─ overall=ok → NO_REPLY（静默）
+  ├─ 写 status.json            └─ overall≠ok → 私聊通知
   ├─ 追加 trends.jsonl
   └─ 有异常 → 创建 anomaly 文件
 ```
 
-### 自检项目（19 项）
+### 自检项目
 
-#### L0 — 基础存活层（6 项）
-| # | 检查项 | 判定标准 |
-|---|--------|----------|
-| Q1 | 进程存活 | Gateway 进程存在且非僵尸 |
-| Q2 | 内存 RSS | <2GB OK / 2-2.5GB 警告 / >3GB 紧急 |
-| Q3 | 磁盘根分区 | <80% OK / >95% 紧急 |
-| Q4 | OOM 检测 | 最近 10 分钟无 OOM kill |
-| Q5 | 子代理状态 | 活跃子代理数 ≤5 |
-| Q6 | 死循环检测 | 30min 内修改文件 <20 个 |
-
-#### L1 — 运行时层（3 项）
-| # | 检查项 | 判定标准 |
-|---|--------|----------|
-| L1-01 | WebSocket 连接 | 1-50 正常 / 0 或 >50 异常 |
-| L1-02 | 关键端口 | Gateway 端口监听中 |
-| L1-03 | 崩溃日志 | 最近 1 小时无 FATAL/SEGFAULT |
-
-#### L2 — 深度分析层（6 项）
-| # | 检查项 | 判定标准 |
-|---|--------|----------|
-| L2-01 | 内存趋势 | 对比最近 5 次基线，>300MB 告警 |
-| L2-02 | 僵尸进程 | 无额外 node 进程 |
-| L2-03 | 环境基线 | Node/npm 版本记录 |
-| L2-04 | 临时文件 | 无 >24h 残留文件 |
-| L2-05 | 网络连通 | DNS 解析正常 |
-| L2-06 | 磁盘工作区 | 工作区目录磁盘使用率 |
-
-#### L3 — 业务合规层（4 项）
-| # | 检查项 | 判定标准 |
-|---|--------|----------|
-| L3-01 | 项目活跃 | 至少 1 个项目 7 天内有变更 |
-| L3-02 | 每日摘要 | 最近 2 天摘要文件存在 |
-| L3-03 | MEMORY.md | 最近 2 天内有更新 |
-| L3-04 | 待办队列 | Pending 任务 ≤5 |
-
-### 输出
-
-**终端输出：**
-```bash
-$ bash scripts/healthcheck.sh
-  ✅ 全部通过 | 19/19 | 耗时 < 5s
-```
-
-**加 `--verbose` 显示明细：**
-```bash
-$ bash scripts/healthcheck.sh --verbose
-┌─ L0: 基础存活层 ────────────────────────┐
-│ L0-Q1  ✅ PID=254413
-│ L0-Q2  ✅ 1286MB
-...
-└────────────────────────────────────────────┘
-```
-
-**JSON 状态文件：**
-```json
-{
-  "ts": "2026-05-01T11:14:38+08:00",
-  "overall": "ok",
-  "total": 19, "ok": 19, "warn": 0, "critical": 0,
-  "anomalies": [],
-  "checks": [
-    {"id": "L0-Q1", "status": "ok", "value": 1, "detail": "PID=254413"},
-    {"id": "L0-Q2", "status": "ok", "value": 1286, "detail": "1286MB"}
-  ]
-}
-```
-
-**趋势记录（JSONL）：**
-```jsonl
-{"ts":"2026-05-01T11:14:38+08:00","check":"L0-Q2","metric":"status","value":1286,"status":"ok"}
-```
-
-### 安装
-
-```bash
-# 方式一：克隆到 OpenClaw workspace
-cd ~/.openclaw/workspace
-git clone https://github.com/JingWang-Star996/openclaw-healthcheck.git projects/openclaw-healthcheck
-
-# 方式二：独立使用
-git clone https://github.com/JingWang-Star996/openclaw-healthcheck.git
-cd openclaw-healthcheck
-bash scripts/healthcheck.sh
-```
+| 层 | 项目 | 说明 |
+|----|------|------|
+| L0 | 进程/内存/磁盘/OOM/子代理/死循环 | 6 项基础存活检查 |
+| L1 | WebSocket/端口/崩溃日志 | 3 项运行时检查 |
+| L2 | 内存趋势/僵尸进程/环境/临时文件/网络/磁盘 | 6 项深度分析 |
+| L3 | 项目活跃/每日摘要/MEMORY.md/待办队列 | 4 项业务合规 |
 
 ### 配置
-
-**系统 crontab（零 token）：**
-```bash
-(crontab -l 2>/dev/null; echo "0 * * * * bash /path/to/scripts/healthcheck.sh --json >> /dev/null 2>&1") | crontab -
-```
 
 **OpenClaw cron（异常通知）：**
 ```json
@@ -160,13 +133,12 @@ bash scripts/healthcheck.sh
 }
 ```
 
-### 退出码
-
-| 退出码 | 含义 |
-|--------|------|
-| 0 | 全部通过 |
-| 1 | 有警告（warn） |
-| 2 | 有异常（critical） |
+### 技术约束
+- ✅ 纯 Bash + 少量 Python3（仅 JSON 解析）
+- ✅ 只读操作，不修改任何系统状态
+- ✅ 单次运行 < 5 秒
+- ✅ 不依赖外部 API
+- ✅ Linux/WSL2 环境
 
 ---
 
@@ -174,107 +146,31 @@ bash scripts/healthcheck.sh
 
 ### Why
 
-When OpenClaw (and similar AI Agent frameworks) run for extended periods, common issues include:
-- Memory leaks leading to OOM crashes
-- Sub-agent hangs / zombie processes
-- Dead loops writing files continuously
-- WebSocket connection leaks
-- Crash logs accumulating unnoticed
-
-The traditional approach is to manually execute commands via AI agent each time — **wasting tokens and unable to build trends**.
-
-This script solves it in pure Bash: **runs automatically every hour, zero tokens, structured output, auto-notifies on anomalies**.
+When AI Agent frameworks run for extended periods, common issues include: memory leaks causing OOM crashes, sub-agent hangs/zombie processes, dead loops writing files, WebSocket connection leaks, crash logs accumulating unnoticed. The traditional approach uses AI agent to manually check — **wasting tokens, unable to build trends**.
 
 ### Architecture
 
 ```
-System crontab (hourly)    OpenClaw cron (offset)
-      ↓                        ↓
-healthcheck.sh --json    Read status.json
-      ↓                        ↓
-  ├─ Run 19 checks         ├─ overall=ok → NO_REPLY (silent)
-  ├─ Write status.json     └─ overall≠ok → Notify user
+System crontab (hourly)        OpenClaw cron (offset)
+      ↓                            ↓
+healthcheck.sh --json        Read status.json
+      ↓                            ↓
+  ├─ Run 19 checks             ├─ overall=ok → NO_REPLY (silent)
+  ├─ Write status.json         └─ overall≠ok → Notify user
   ├─ Append trends.jsonl
   └─ On anomaly → create anomaly file
 ```
 
-### Checks (19 items)
+### Checks
 
-#### L0 — Survival Layer (6 items)
-| # | Check | Criteria |
-|---|-------|----------|
-| Q1 | Process alive | Gateway process exists, not zombie |
-| Q2 | Memory RSS | <2GB OK / 2-2.5GB warn / >3GB critical |
-| Q3 | Root disk | <80% OK / >95% critical |
-| Q4 | OOM detection | No OOM kill in last 10 min |
-| Q5 | Sub-agent state | Active sub-agents ≤5 |
-| Q6 | Dead-loop detection | <20 files modified in 30 min |
-
-#### L1 — Runtime Layer (3 items)
-| # | Check | Criteria |
-|---|-------|----------|
-| L1-01 | WebSocket connections | 1-50 normal / 0 or >50 abnormal |
-| L1-02 | Key port | Gateway port listening |
-| L1-03 | Crash logs | No FATAL/SEGFAULT in last 1 hour |
-
-#### L2 — Deep Analysis Layer (6 items)
-| # | Check | Criteria |
-|---|-------|----------|
-| L2-01 | Memory trend | vs last 5-run baseline, >300MB alert |
-| L2-02 | Zombie processes | No extra node processes |
-| L2-03 | Environment baseline | Node/npm version record |
-| L2-04 | Temp files | No files >24h old |
-| L2-05 | Network connectivity | DNS resolution works |
-| L2-06 | Workspace disk | Workspace directory disk usage |
-
-#### L3 — Business Compliance Layer (4 items)
-| # | Check | Criteria |
-|---|-------|----------|
-| L3-01 | Project activity | At least 1 project changed in 7 days |
-| L3-02 | Daily summary | Recent 2 daily summary files exist |
-| L3-03 | MEMORY.md | Updated within 2 days |
-| L3-04 | Pending tasks | Pending tasks ≤5 |
-
-### Output
-
-**Terminal output:**
-```bash
-$ bash scripts/healthcheck.sh
-  ✅ All passed | 19/19 | < 5s
-```
-
-**JSON status file:**
-```json
-{
-  "ts": "2026-05-01T11:14:38+08:00",
-  "overall": "ok",
-  "total": 19, "ok": 19, "warn": 0, "critical": 0,
-  "anomalies": [],
-  "checks": [
-    {"id": "L0-Q1", "status": "ok", "value": 1, "detail": "PID=254413"}
-  ]
-}
-```
-
-### Installation
-
-```bash
-# Clone to OpenClaw workspace
-cd ~/.openclaw/workspace
-git clone https://github.com/JingWang-Star996/openclaw-healthcheck.git projects/openclaw-healthcheck
-
-# Or standalone
-git clone https://github.com/JingWang-Star996/openclaw-healthcheck.git
-cd openclaw-healthcheck
-bash scripts/healthcheck.sh
-```
+| Layer | Items | Description |
+|-------|-------|-------------|
+| L0 | Process/Memory/Disk/OOM/Sub-agent/Dead-loop | 6 survival checks |
+| L1 | WebSocket/Port/Crash logs | 3 runtime checks |
+| L2 | Memory trend/Zombie/Env/Temp files/DNS/Disk | 6 deep analysis |
+| L3 | Projects/Daily summary/MEMORY.md/Pending tasks | 4 business compliance |
 
 ### Configuration
-
-**System crontab (zero tokens):**
-```bash
-(crontab -l 2>/dev/null; echo "0 * * * * bash /path/to/scripts/healthcheck.sh --json >> /dev/null 2>&1") | crontab -
-```
 
 **OpenClaw cron (anomaly notification):**
 ```json
@@ -289,13 +185,12 @@ bash scripts/healthcheck.sh
 }
 ```
 
-### Exit Codes
-
-| Code | Meaning |
-|------|---------|
-| 0 | All passed |
-| 1 | Warnings present |
-| 2 | Critical anomalies |
+### Technical Constraints
+- ✅ Pure Bash + minimal Python3 (JSON parsing only)
+- ✅ Read-only, no system modifications
+- ✅ < 5 seconds per run
+- ✅ No external API dependencies
+- ✅ Linux/WSL2 environment
 
 ---
 
@@ -303,104 +198,31 @@ bash scripts/healthcheck.sh
 
 ### なぜ必要か
 
-OpenClaw（および類似の AI Agent フレームワーク）が長時間実行される場合、一般的な問題点：
-- メモリリークによる OOM クラッシュ
-- サブエージェントのハング / ゾンビプロセス
-- デッドループによるファイルの連続書き込み
-- WebSocket 接続のリーク
-- クラッシュログの蓄積（誰も気づかない）
-
-従来の方法は、毎回 AI agent でコマンドを手動実行すること——**トークンの無駄、かつトレンドの蓄積が不可能**。
-
-このスクリプトは纯 Bash で解決：**毎時間自動実行、ゼロトークン、構造化出力、異常時に自動通知**。
+AI Agent フレームワークが長時間実行される場合、メモリリークによる OOM クラッシュ、サブエージェントのハング/ゾンビプロセス、デッドループによる連続書き込み、WebSocket 接続リーク、クラッシュログの蓄積（誰も気づかない）などの問題が発生します。従来の AI agent による手動チェックは——**トークンの無駄、トレンド蓄積不可能**。
 
 ### アーキテクチャ
 
 ```
-システム crontab（毎時）    OpenClaw cron（ずらす）
-      ↓                        ↓
-healthcheck.sh --json    status.json を読み取り
-      ↓                        ↓
-  ├─ 19 項目チェック        ├─ overall=ok → NO_REPLY（沈黙）
-  ├─ status.json を書き込む  └─ overall≠ok → ユーザーに通知
+システム crontab（毎時）        OpenClaw cron（ずらす）
+      ↓                            ↓
+healthcheck.sh --json        status.json を読み取り
+      ↓                            ↓
+  ├─ 19 項目チェック             ├─ overall=ok → NO_REPLY（沈黙）
+  ├─ status.json を書き込む      └─ overall≠ok → ユーザー通知
   ├─ trends.jsonl に追記
-  └─ 異常時 → anomaly ファイルを作成
+  └─ 異常時 → anomaly ファイル作成
 ```
 
-### チェック項目（19 項目）
+### チェック項目
 
-#### L0 — 生存レイヤー（6 項目）
-| # | チェック | 判定基準 |
-|---|----------|----------|
-| Q1 | プロセス存活 | Gateway プロセス存在、ゾンビでない |
-| Q2 | メモリ RSS | <2GB OK / 2-2.5GB 警告 / >3GB 緊急 |
-| Q3 | ルートディスク | <80% OK / >95% 緊急 |
-| Q4 | OOM 検出 | 直近 10 分以内に OOM kill なし |
-| Q5 | サブエージェント状態 | 稼働中 ≤5 |
-| Q6 | デッドループ検出 | 30 分以内のファイル変更 <20 個 |
-
-#### L1 — ランタイムレイヤー（3 項目）
-| # | チェック | 判定基準 |
-|---|----------|----------|
-| L1-01 | WebSocket 接続数 | 1-50 正常 / 0 or >50 異常 |
-| L1-02 | 重要ポート | Gateway ポートがリスニング中 |
-| L1-03 | クラッシュログ | 直近 1 時間以内に FATAL/SEGFAULT なし |
-
-#### L2 — 深度分析レイヤー（6 項目）
-| # | チェック | 判定基準 |
-|---|----------|----------|
-| L2-01 | メモリトレンド | 直近 5 回ベースライン比較、>300MB で警告 |
-| L2-02 | ゾンビプロセス | 余分な node プロセスなし |
-| L2-03 | 環境ベースライン | Node/npm バージョン記録 |
-| L2-04 | 一時ファイル | 24 時間以上の残存ファイルなし |
-| L2-05 | ネットワーク接続 | DNS 解決が正常 |
-| L2-06 | ワークスペースディスク | ワークスペースディレクトリのディスク使用率 |
-
-#### L3 — ビジネスコンプライアンスレイヤー（4 項目）
-| # | チェック | 判定基準 |
-|---|----------|----------|
-| L3-01 | プロジェクト活動 | 少なくとも 1 プロジェクトが 7 日以内に変更 |
-| L3-02 | 日次サマリー | 直近 2 日のサマリーファイルが存在 |
-| L3-03 | MEMORY.md | 2 日以内に更新 |
-| L3-04 | 保留タスク | 保留タスク ≤5 |
-
-### 出力
-
-**ターミナル出力：**
-```bash
-$ bash scripts/healthcheck.sh
-  ✅ 全て通過 | 19/19 | < 5秒
-```
-
-**JSON 状態ファイル：**
-```json
-{
-  "ts": "2026-05-01T11:14:38+08:00",
-  "overall": "ok",
-  "total": 19, "ok": 19, "warn": 0, "critical": 0,
-  "anomalies": []
-}
-```
-
-### インストール
-
-```bash
-# OpenClaw workspace にクローン
-cd ~/.openclaw/workspace
-git clone https://github.com/JingWang-Star996/openclaw-healthcheck.git projects/openclaw-healthcheck
-
-# またはスタンドアロン
-git clone https://github.com/JingWang-Star996/openclaw-healthcheck.git
-cd openclaw-healthcheck
-bash scripts/healthcheck.sh
-```
+| レイヤー | 項目 | 説明 |
+|----------|------|------|
+| L0 | プロセス/メモリ/ディスク/OOM/サブエージェント/デッドループ | 6 項目生存チェック |
+| L1 | WebSocket/ポート/クラッシュログ | 3 項目ランタイムチェック |
+| L2 | メモリトレンド/ゾンビ/環境/一時ファイル/DNS/ディスク | 6 項目深度分析 |
+| L3 | プロジェクト/日次サマリー/MEMORY.md/保留タスク | 4 項目ビジネスコンプライアンス |
 
 ### 設定
-
-**システム crontab（ゼロトークン）：**
-```bash
-(crontab -l 2>/dev/null; echo "0 * * * * bash /path/to/scripts/healthcheck.sh --json >> /dev/null 2>&1") | crontab -
-```
 
 **OpenClaw cron（異常通知）：**
 ```json
@@ -409,31 +231,280 @@ bash scripts/healthcheck.sh
   "schedule": { "kind": "every", "everyMs": 3600000 },
   "payload": {
     "kind": "agentTurn",
-    "message": "status.json を読み取り、overall=ok → NO_REPLY、そうでなければ anomalies を抽出してユーザーに通知。"
+    "message": "status.json を読み取り、overall=ok → NO_REPLY、異常なら anomalies を通知。"
   },
   "sessionTarget": "isolated"
 }
 ```
 
-### 終了コード
-
-| コード | 意味 |
-|--------|------|
-| 0 | 全て通過 |
-| 1 | 警告あり |
-| 2 | 重大な異常あり |
+### 技術制約
+- ✅ 纯 Bash + 最小限の Python3（JSON パースのみ）
+- ✅ 読み取り専用
+- ✅ 1 回 < 5 秒
+- ✅ 外部 API 不要
+- ✅ Linux/WSL2 環境
 
 ---
 
-## 技术约束 / Technical Constraints / 技術制約
+## 🇰🇷 한국어
 
-| | 🇨🇳 | 🇬🇧 | 🇯🇵 |
-|---|---|---|---|
-| 语言 | 纯 Bash + 少量 Python3 | Pure Bash + minimal Python3 | 纯 Bash + 最小限の Python3 |
-| 操作 | 只读操作 | Read-only | 読み取り専用 |
-| 耗时 | 单次 < 5 秒 | < 5s per run | 1 回 < 5 秒 |
-| API | 不依赖外部 API | No external API | 外部 API 不要 |
-| 环境 | Linux/WSL2 | Linux/WSL2 | Linux/WSL2 |
+### 왜 필요한가
+
+AI Agent 프레임워크가 장시간 실행될 때 발생하는 일반적인 문제: 메모리 누수로 인한 OOM 크래시, 서브 에이전트 멈춤/좀비 프로세스, 데드루프로 인한 파일 연속 쓰기, WebSocket 연결 누수, 크래시 로그 축적(아무도 모름). 기존 AI agent 수동 체크 방식은——**토큰 낭비, 트렌드 축적 불가**.
+
+### 아키텍처
+
+```
+시스템 crontab (매시간)        OpenClaw cron (시간차)
+      ↓                            ↓
+healthcheck.sh --json        status.json 읽기
+      ↓                            ↓
+  ├─ 19개 체크 실행              ├─ overall=ok → NO_REPLY (조용)
+  ├─ status.json 쓰기            └─ overall≠ok → 사용자 알림
+  ├─ trends.jsonl 추가
+  └─异常시 → anomaly 파일 생성
+```
+
+### 체크 항목
+
+| 레이어 | 항목 | 설명 |
+|--------|------|------|
+| L0 | 프로세스/메모리/디스크/OOM/서브에이전트/데드루프 | 6개 생존 체크 |
+| L1 | WebSocket/포트/크래시 로그 | 3개 런타임 체크 |
+| L2 | 메모리 트렌드/좀비/환경/임시파일/DNS/디스크 | 6개 심층 분석 |
+| L3 | 프로젝트/일일 요약/MEMORY.md/대기 작업 | 4개 비즈니스 컴플라이언스 |
+
+### 설정
+
+**OpenClaw cron (异常 알림):**
+```json
+{
+  "name": "헬스체크 결과",
+  "schedule": { "kind": "every", "everyMs": 3600000 },
+  "payload": {
+    "kind": "agentTurn",
+    "message": "status.json 읽기, overall=ok → NO_REPLY, 아니면 anomalies 추출하여 사용자 알림."
+  },
+  "sessionTarget": "isolated"
+}
+```
+
+### 기술 제약
+- ✅ 순수 Bash + 최소 Python3 (JSON 파싱만)
+- ✅ 읽기 전용
+- ✅ 1회 < 5초
+- ✅ 외부 API 불필요
+- ✅ Linux/WSL2 환경
+
+---
+
+## 🇪🇸 Español
+
+### Por qué
+
+Cuando frameworks de IA se ejecutan por largos períodos, problemas comunes incluyen: fugas de memoria causando crashes OOM, procesos zombie, bucles infinitos escribiendo archivos, fugas de conexiones WebSocket, logs de crash acumulándose sin ser detectados. El enfoque tradicional con IA manual——**desperdicia tokens, imposible acumular tendencias**.
+
+### Arquitectura
+
+```
+Crontab del sistema (cada hora)    Cron de OpenClaw (desfasado)
+      ↓                                    ↓
+healthcheck.sh --json                Leer status.json
+      ↓                                    ↓
+  ├─ Ejecutar 19 checks                ├─ overall=ok → NO_REPLY (silencio)
+  ├─ Escribir status.json              └─ overall≠ok → Notificar usuario
+  ├─ Agregar a trends.jsonl
+  └─ En anomalía → crear archivo anomaly
+```
+
+### Ítems de verificación
+
+| Capa | Ítems | Descripción |
+|------|-------|-------------|
+| L0 | Proceso/Memoria/Disco/OOM/Sub-agente/Bucle | 6 checks de supervivencia |
+| L1 | WebSocket/Puerto/Logs de crash | 3 checks de runtime |
+| L2 | Tendencia memoria/Zombie/Entorno/Temp/DNS/Disco | 6 análisis profundo |
+| L3 | Proyectos/Resumen diario/MEMORY.md/Tareas pendientes | 4 cumplimiento negocio |
+
+### Configuración
+
+**OpenClaw cron (notificación de anomalías):**
+```json
+{
+  "name": "Resultado de verificación",
+  "schedule": { "kind": "every", "everyMs": 3600000 },
+  "payload": {
+    "kind": "agentTurn",
+    "message": "Leer status.json, overall=ok → NO_REPLY, sino extraer anomalies y notificar."
+  },
+  "sessionTarget": "isolated"
+}
+```
+
+### Restricciones técnicas
+- ✅ Bash puro + Python3 mínimo (solo parsing JSON)
+- ✅ Solo lectura
+- ✅ < 5 segundos por ejecución
+- ✅ Sin dependencias de API externa
+- ✅ Entorno Linux/WSL2
+
+---
+
+## 🇫🇷 Français
+
+### Pourquoi
+
+Lorsque des frameworks IA tournent longtemps, problèmes courants : fuites mémoire causant des crashes OOM, processus zombies, boucles infinies écrivant des fichiers, fuites de connexions WebSocket, logs de crash s'accumulant sans être détectés. L'approche traditionnelle avec IA manuelle——**gâche des tokens, impossible d'accumuler des tendances**.
+
+### Architecture
+
+```
+Crontab système (chaque heure)    Cron OpenClaw (décalé)
+      ↓                                ↓
+healthcheck.sh --json            Lire status.json
+      ↓                                ↓
+  ├─ Exécuter 19 vérifications      ├─ overall=ok → NO_REPLY (silence)
+  ├─ Écrire status.json             └─ overall≠ok → Notifier l'utilisateur
+  ├─ Ajouter à trends.jsonl
+  └─ En anomalie → créer fichier anomaly
+```
+
+### Éléments de vérification
+
+| Couche | Éléments | Description |
+|--------|----------|-------------|
+| L0 | Processus/Mémoire/Disque/OOM/Sous-agent/Boucle | 6 vérifications survie |
+| L1 | WebSocket/Port/Logs de crash | 3 vérifications runtime |
+| L2 | Tendance mémoire/Zombie/Env/Fichiers temp/DNS/Disque | 6 analyses profondes |
+| L3 | Projets/Résumé quotidien/MEMORY.md/Tâches en attente | 4 conformité métier |
+
+### Configuration
+
+**OpenClaw cron (notification d'anomalies) :**
+```json
+{
+  "name": "Résultat de vérification",
+  "schedule": { "kind": "every", "everyMs": 3600000 },
+  "payload": {
+    "kind": "agentTurn",
+    "message": "Lire status.json, overall=ok → NO_REPLY, sinon extraire anomalies et notifier."
+  },
+  "sessionTarget": "isolated"
+}
+```
+
+### Contraintes techniques
+- ✅ Bash pur + Python3 minimal (parsing JSON uniquement)
+- ✅ Lecture seule
+- ✅ < 5 secondes par exécution
+- ✅ Pas de dépendances API externe
+- ✅ Environnement Linux/WSL2
+
+---
+
+## 🇩🇪 Deutsch
+
+### Warum
+
+Wenn KI-Frameworks lange laufen, häufige Probleme: Speicherlecks导致 OOM-Crashes, Zombie-Prozesse, Endlosschleifen die Dateien schreiben, WebSocket-Verbindungslecks, Crash-Logs die unbemerkt anwachsen. Der traditionelle Ansatz mit manueller KI-Prüfung——**verschwendet Tokens, unmöglich Trends aufzubauen**.
+
+### Architektur
+
+```
+System-Crontab (stündlich)        OpenClaw-Cron (versetzt)
+      ↓                                ↓
+healthcheck.sh --json            status.json lesen
+      ↓                                ↓
+  ├─ 19 Prüfungen ausführen         ├─ overall=ok → NO_REPLY (still)
+  ├─ status.json schreiben          └─ overall≠ok → Benutzer benachrichtigen
+  ├─ Zu trends.jsonl hinzufügen
+  └─ Bei Anomalie → anomaly-Datei erstellen
+```
+
+### Prüfpunkte
+
+| Ebene | Punkte | Beschreibung |
+|-------|--------|--------------|
+| L0 | Prozess/Speicher/Platte/OOM/Sub-Agent/Schleife | 6 Überlebensprüfungen |
+| L1 | WebSocket/Port/Crash-Logs | 3 Runtime-Prüfungen |
+| L2 | Speichertrend/Zombie/Env/Temp-Dateien/DNS/Platte | 6 Tiefenanalyse |
+| L3 | Projekte/Tägliche Zusammenfassung/MEMORY.md/Offene Aufgaben | 4 Geschäfts-Compliance |
+
+### Konfiguration
+
+**OpenClaw cron (Anomalie-Benachrichtigung):**
+```json
+{
+  "name": "Prüfergebnis",
+  "schedule": { "kind": "every", "everyMs": 3600000 },
+  "payload": {
+    "kind": "agentTurn",
+    "message": "status.json lesen, overall=ok → NO_REPLY, sonst anomalies extrahieren und benachrichtigen."
+  },
+  "sessionTarget": "isolated"
+}
+```
+
+### Technische Einschränkungen
+- ✅ Reines Bash + minimales Python3 (nur JSON-Parsing)
+- ✅ Nur-Lesen
+- ✅ < 5 Sekunden pro Lauf
+- ✅ Keine externen API-Abhängigkeiten
+- ✅ Linux/WSL2-Umgebung
+
+---
+
+## 🇷🇺 Русский
+
+### Зачем
+
+Когда AI-фреймворки работают длительное время, типичные проблемы: утечки памяти вызывающие OOM-краши, зомби-процессы, бесконечные циклы записи файлов, утечки WebSocket-соединений, логи крашей накапливаются незамеченными. Традиционный подход с ручной проверкой через AI——**тратит токены, невозможно накапливать тренды**.
+
+### Архитектура
+
+```
+Системный crontab (каждый час)    OpenClaw cron (со сдвигом)
+      ↓                                ↓
+healthcheck.sh --json            Чтение status.json
+      ↓                                ↓
+  ├─ Запуск 19 проверок             ├─ overall=ok → NO_REPLY (тихо)
+  ├─ Запись status.json             └─ overall≠ok → Уведомить пользователя
+  ├─ Добавление в trends.jsonl
+  └─ При аномалии → создать anomaly-файл
+```
+
+### Элементы проверки
+
+| Уровень | Элементы | Описание |
+|---------|----------|----------|
+| L0 | Процесс/Память/Диск/OOM/Суб-агент/Цикл | 6 проверок выживания |
+| L1 | WebSocket/Порт/Логи крашей | 3 проверки runtime |
+| L2 | Тренд памяти/Зомби/Окружение/Врем.файлы/DNS/Диск | 6 глубокий анализ |
+| L3 | Проекты/Ежедневный обзор/MEMORY.md/Ожидающие задачи | 4 бизнес-соответствие |
+
+### Конфигурация
+
+**OpenClaw cron (уведомление об аномалиях):**
+```json
+{
+  "name": "Результат проверки",
+  "schedule": { "kind": "every", "everyMs": 3600000 },
+  "payload": {
+    "kind": "agentTurn",
+    "message": "Прочитать status.json, overall=ok → NO_REPLY, иначе извлечь anomalies и уведомить."
+  },
+  "sessionTarget": "isolated"
+}
+```
+
+### Технические ограничения
+- ✅ Чистый Bash + минимум Python3 (только парсинг JSON)
+- ✅ Только чтение
+- ✅ < 5 секунд за запуск
+- ✅ Без внешних API-зависимостей
+- ✅ Окружение Linux/WSL2
+
+---
 
 ## License
 
