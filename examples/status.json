@@ -1,0 +1,30 @@
+{
+  "ts": "2026-05-01T11:14:38+08:00",
+  "overall": "ok",
+  "total": 19,
+  "ok": 19,
+  "warn": 0,
+  "critical": 0,
+  "anomalies": [],
+  "checks": [
+    {"id": "L0-Q1", "status": "ok", "value": 1, "detail": "PID=254413"},
+    {"id": "L0-Q2", "status": "ok", "value": 1286, "detail": "1286MB"},
+    {"id": "L0-Q3", "status": "ok", "value": 4, "detail": "4%"},
+    {"id": "L0-Q4", "status": "ok", "value": 0, "detail": "无"},
+    {"id": "L0-Q5", "status": "ok", "value": 0, "detail": "无活跃子代理"},
+    {"id": "L0-Q6", "status": "ok", "value": 3, "detail": "30min内3文件"},
+    {"id": "L1-01", "status": "ok", "value": 0, "detail": "无客户端在线"},
+    {"id": "L1-02", "status": "ok", "value": 1, "detail": "端口监听中"},
+    {"id": "L1-03", "status": "ok", "value": 0, "detail": "无"},
+    {"id": "L2-01", "status": "ok", "value": 0, "detail": "无历史基线"},
+    {"id": "L2-02", "status": "ok", "value": 0, "detail": "无额外node进程"},
+    {"id": "L2-03", "status": "ok", "value": 1, "detail": "node=v24.14.1 npm=11.11.0"},
+    {"id": "L2-04", "status": "ok", "value": 0, "detail": "无"},
+    {"id": "L2-05", "status": "ok", "value": 1, "detail": "DNS正常"},
+    {"id": "L2-06", "status": "ok", "value": 4, "detail": "4%"},
+    {"id": "L3-01", "status": "ok", "value": 7, "detail": "7/26"},
+    {"id": "L3-02", "status": "ok", "value": 0, "detail": "近2天完整"},
+    {"id": "L3-03", "status": "ok", "value": 0, "detail": "0天前"},
+    {"id": "L3-04", "status": "ok", "value": 0, "detail": "0项"}
+  ]
+}
